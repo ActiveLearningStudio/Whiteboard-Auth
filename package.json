@@ -1,0 +1,69 @@
+{
+  "name": "auth0-tenant-service",
+  "version": "1.0.0",
+  "description": "auth0-tenant-service for client authentication",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "./node_modules/.bin/tsc -p .",
+    "copy": "cd ..\\fr-service && XCOPY build\\** ..\\bk-service\\public\\ /E/H/C/I/Y",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "8.2.0",
+    "errorhandler": "1.5.1",
+    "express": "^4.17.1",
+    "express-validator": "^5.3.0",
+    "fs": "0.0.1-security",
+    "jsdoc": "^3.6.7",
+    "jsonwebtoken": "8.5.1",
+    "minio": "^7.0.18",
+    "mongoose": "5.9.12",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.6.3",
+    "path": "0.12.7",
+    "socket.io": "^4.1.3",
+    "socket.io-file": "^2.0.31",
+    "socketio-file-upload": "^0.7.3",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6",
+    "ui": "^0.2.4",
+    "uniqid": "5.2.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/errorhandler": "^1.5.0",
+    "@types/express": "^4.17.6",
+    "@types/jquery": "^3.5.6",
+    "@types/jsonwebtoken": "^8.3.9",
+    "@types/mongodb": "^3.5.15",
+    "@types/mongoose": "^5.7.15",
+    "@types/node": "^13.13.4",
+    "nodemon": "2.0.3",
+    "ts-node": "8.10.1",
+    "ts-node-dev": "1.0.0-pre.44",
+    "typescript": "3.8.3"
+  },
+  "bin": "lib/index.js",
+  "pkg": {
+    "scripts": [
+      "scripts/**/*.js"
+    ],
+    "assets": [
+      "node_modules/**/*.js",
+      "node_modules/**/*.css",
+      "public/**/*"
+    ],
+    "targets": [
+      "node14-linux-x64"
+    ],
+    "outputPath": "dist"
+  }
+}

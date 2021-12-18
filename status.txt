@@ -1,0 +1,10 @@
+[+] create schema
+[+] create functions
+[+] create route fro db
+[+] get all client
+[+] get single client by id
+[+] add client
+[+] update client
+[+] delete client
+[+] get token for loggedin user
+[+] verify token

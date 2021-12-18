@@ -1,1 +1,2 @@
-# Whiteboard-Auth
+# Auth0 tenant
+

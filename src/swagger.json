@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Curriki Whiteboard Project",
+    "description": "API for whiteboard"
+  },
+  "host": "localhost:8100",
+  "basePath": "/v1",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/client/add_client": {
+      "post": {
+        "tags": ["client"],
+        "description": "create a new user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "created a new client",
+            "schema": {
+              "$ref": "#/definitions/clientSchema"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "client is created",
+            "schema": {
+              "$ref": "#/definitions/clientSchema"
+            }
+          }
+        }
+      }
+    },
+
+    "/client/client/{id}": {
+      "get": {
+        "tags": ["client"],
+        "description": "get single clients",
+        "operationId": "getSingleClient",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "example": "6110f228a6d87e1460be2c62",
+            "in": "path",
+            "description": "Mongodb ID of the client to get",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/clientSchema"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "client not found"
+          }
+        }
+      }
+    },
+
+    "/client/all_client": {
+      "get": {
+        "tags": ["client"],
+        "description": "get all clients",
+        "operationId": "getAllClients",
+        "produces": ["application/json", "application/xml"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/clientSchema"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Whiteboard not found"
+          }
+        }
+      }
+    },
+
+    "/client/update_client": {
+      "put": {
+        "tags": [
+          "client"
+        ],
+        "description": "update client.",
+        "operationId": "updateclient",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateclientSchema"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "client not found"
+          }
+        }
+      }
+    },
+
+    "/client/delete_client": {
+      "delete": {
+        "tags": ["client"],
+        "description": "Delete client by id",
+        "operationId": "deleteclient",
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "example": {"id": "6110f228a6d87e1460be2c62"},
+            "description": "client id to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "client not found"
+          }
+        }
+      }
+    },
+
+    "/client/get_token": {
+      "post": {
+        "tags": ["client"],
+        "description": "create a new token",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "example": {"clientId": "6110f228a6d87e1460be2c62","secretKey": "6110f228a6d87e1460be2c62"},
+            "description": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "token is created"
+            
+          }
+        }
+      }
+    },
+
+    "/client/verify_token": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": ["client"],
+        "description": "get detail token",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "token is created"    
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "clientSchema": {
+      "required": ["clientId","secretKey"],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "secretKey": {
+          "type": "string"
+        }
+      }
+    },
+    "updateclientSchema": {
+      "required": ["clientId","secretKey"],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "secretKey": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
